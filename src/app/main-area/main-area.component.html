@@ -1,0 +1,61 @@
+<button class="btn btn-primary" (click)="choice='trainers'">Trainers</button>
+<button class="btn btn-warning" (click)="choice='bank'">Bank</button>
+<div class="container" *ngIf="choice==='trainers'">
+    <input type="text" [(ngModel)]="newTrainer">
+    <button (click)="addTrainer()" 
+    [disabled]=" newTrainer===null || newTrainer==='' ? true : false "
+    [ngClass]="newTrainer===null || newTrainer==='' ? 'bg-danger': 'bg-success'">
+        Add Trainer
+    </button>
+    <input type="calendar">
+    <h3>Trainers List</h3>
+    <ul *ngIf=" trainers ? true:false">
+        <li *ngFor="let t of trainers;let i=index">
+            {{t}}<button (click)="deleteTrainer(i)">Delete</button>
+        </li>
+        <li *ngIf="addTrainerFlag">
+            <span class="spinner-border text-muted"></span>
+            Adding...               
+        </li>
+    </ul>
+    <button class="btn btn-primary" disabled *ngIf="trainers?false:true">
+        <span class="spinner-grow spinner-grow-sm"></span>
+        Please add trainers..
+    </button>
+</div>
+<div *ngIf="choice==='bank'">
+    <h1>Welcome to My Bank</h1>
+    <div class="container text-center form-group ">        
+        <label>Please Select Type of Account:</label>
+        <select class="form-control p-2" [(ngModel)]="selectedAccountType">
+            <option value="savings">Savings Account</option>
+            <option value="current">Current Account</option>
+            <option value="loan">Loan Account</option>
+            <option value="creditcard">CreditCard Account</option>
+        </select>
+        <div *ngIf="selectedAccountType">
+            <label>Please Select Type of Service:</label>
+            <select class="form-control p-2" [(ngModel)]="selectedServiceType">
+                <option>Transaction</option>
+                <option>Password Change</option>
+                <option>Auto Bill Payments</option>
+                <option>CreditCard Account</option>
+            </select>
+        </div>
+        <div class=" p-2">
+            <button class="btn btn-danger">Cancel</button>
+            <button class="btn btn-info" (click)="selectedAccountType=null;selectedServiceType=null">Reset</button>
+            <button class="btn btn-success" [disabled]="selectedAccountType===null || selectedServiceType===null" (click)="choice='statement'">Next</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="choice==='statement'">
+    <h1>This is Statement</h1>
+    selected Account Type : {{selectedAccountType}}<br>
+    selected service type : {{selectedServiceType}}
+    <div class=" p-2">
+        <button class="btn btn-danger">Cancel</button>
+        <button class="btn btn-info" (click)="choice='bank'">Edit</button>
+        <button class="btn btn-success" [disabled]="selectedAccountType===null || selectedServiceType===null" (click)="choice='statement'">Next</button>
+    </div>
+</div>
