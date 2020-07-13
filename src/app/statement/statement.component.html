@@ -1,0 +1,10 @@
+<div>
+    <h1>This is Statement</h1>
+    selected Account Type : {{selectedAccountType}}<br>
+    selected service type : {{selectedServiceType}}
+    <div class=" p-2">
+        <button class="btn btn-danger">Cancel</button>
+        <button class="btn btn-info" (click)="choice='bank'">Edit</button>
+        <button class="btn btn-success" [disabled]="selectedAccountType===null || selectedServiceType===null" (click)="choice='statement'">Next</button>
+    </div>
+</div>

@@ -12,8 +12,7 @@ export class MainAreaComponent{
   addTrainerFlag = false;
   trainers:string[] | undefined;
   choice='bank';
-  selectedAccountType=null;
-  selectedServiceType=null;
+ 
   addTrainer(){
 
     this.trainers === undefined ? this.trainers = []:'';

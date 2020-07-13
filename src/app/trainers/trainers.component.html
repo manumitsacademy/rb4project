@@ -1,0 +1,23 @@
+<div class="container">
+    <input type="text" [(ngModel)]="newTrainer">
+    <button (click)="addTrainer()" 
+    [disabled]=" newTrainer===null || newTrainer==='' ? true : false "
+    [ngClass]="newTrainer===null || newTrainer==='' ? 'bg-danger': 'bg-success'">
+        Add Trainer
+    </button>
+    <input type="calendar">
+    <h3>Trainers List</h3>
+    <ul *ngIf=" trainers ? true:false">
+        <li *ngFor="let t of trainers;let i=index">
+            {{t}}<button (click)="deleteTrainer(i)">Delete</button>
+        </li>
+        <li *ngIf="addTrainerFlag">
+            <span class="spinner-border text-muted"></span>
+            Adding...               
+        </li>
+    </ul>
+    <button class="btn btn-primary" disabled *ngIf="trainers?false:true">
+        <span class="spinner-grow spinner-grow-sm"></span>
+        Please add trainers..
+    </button>
+</div>

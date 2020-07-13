@@ -1,0 +1,22 @@
+<div>
+    <h1>Welcome to My Bank</h1>
+    <div class="container text-center form-group ">        
+        <label>Please Select Type of Account:</label>
+        <select class="form-control p-2" [(ngModel)]="selectedAccountTypeIndex" (change)="handleAccountType()">
+            <option *ngFor="let account of accountTypes;let i=index" [value]="i" >{{account.accountTypeName}}</option>
+        </select>
+        <div *ngIf="selectedAccountTypeIndex!=null">
+            <label>Please Select Type of Service:</label>
+            <select class="form-control p-2" [(ngModel)]="selectedServiceType">
+                <option *ngFor="let serviceType of accountTypes[selectedAccountTypeIndex].accountServices">
+                    {{serviceType}}
+                </option>
+            </select>
+        </div>
+        <div class=" p-2">
+            <button class="btn btn-danger">Cancel</button>
+            <button class="btn btn-info" (click)="selectedAccountTypeIndex=null;selectedServiceType=null">Reset</button>
+            <button class="btn btn-success" [disabled]="selectedAccountTypeIndex===null || selectedServiceType===null" (click)="choice='statement'">Next</button>
+        </div>
+    </div>
+</div>
